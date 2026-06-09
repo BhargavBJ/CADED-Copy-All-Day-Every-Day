@@ -1,0 +1,35 @@
+[project]
+name = "caded"
+version = "0.1.0"
+description = "Cheat-All-Day-Every-Day"
+authors = [
+    {name = "Bhargav B J",email = "bjbhargav60@gmail.com"}
+]
+license = "MIT License"
+requires-python = "^3.12"
+dependencies = [
+    "fastapi[standard] (>=0.136.3,<0.137.0)",
+    "uvicorn (>=0.49.0,<0.50.0)",
+    "langchain (>=1.3.4,<2.0.0)",
+    "langchain-core (>=1.4.1,<2.0.0)",
+    "langchain-community (>=0.4.2,<0.5.0)",
+    "langchain-groq (>=1.1.2,<2.0.0)",
+    "langchain-openai (>=1.2.2,<2.0.0)",
+    "langgraph (>=1.2.4,<2.0.0)",
+    "pymupdf (>=1.27.2.3,<2.0.0.0)",
+    "python-multipart (>=0.0.32,<0.0.33)",
+    "python-dotenv (>=1.2.2,<2.0.0)",
+    "pydantic (>=2.13.4,<3.0.0)",
+    "httpx (>=0.28.1,<0.29.0)",
+    "markdown (>=3.10.2,<4.0.0)",
+    "itsdangerous (>=2.2.0,<3.0.0)",
+    "tavily-python (>=0.7.25,<0.8.0)",
+    "easyocr (>=1.7.2,<2.0.0)",
+    "opencv-python (>=4.13.0.92,<5.0.0.0)",
+    "numpy (>=2.4.6,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
