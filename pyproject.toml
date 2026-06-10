@@ -1,7 +1,7 @@
 [project]
-name = "caded"
+name = "Cortex"
 version = "0.1.0"
-description = "Cheat-All-Day-Every-Day"
+description = "A better ChatGPT"
 authors = [
     {name = "Bhargav B J",email = "bjbhargav60@gmail.com"}
 ]
