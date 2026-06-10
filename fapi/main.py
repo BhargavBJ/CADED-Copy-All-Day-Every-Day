@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from markdown import markdown
 from datetime import datetime
-
+import json
 from fapi.llm import get_response
 from fapi.session import load_session, save_session, cleanup_sessions, get_session_file
 
