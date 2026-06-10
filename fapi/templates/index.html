@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My AI</title>
 
     <style>
@@ -13,59 +13,105 @@
 
         body {
             margin: 0;
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-            background: #141414;
-            color: #eaeaea;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #e0e0e0;
         }
 
-        /* APP */
+        /* LAYOUT */
         .app {
             height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* TOP BAR */
+        /* TOP */
         .topbar {
-            padding: 14px 20px;
-            border-bottom: 1px solid #232323;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #171717;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
         }
 
         .title {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
         }
 
         .clear {
-            background: #c96f20;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
             color: white;
-            padding: 8px 14px;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 8px;
             text-decoration: none;
             font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
+        }
+
+        .clear:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
         }
 
         /* CHAT */
         .chat {
             flex: 1;
             overflow-y: auto;
-            padding: 28px 0;
+            padding: 32px 0;
+            scroll-behavior: smooth;
+        }
+
+        .chat::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat::-webkit-scrollbar-thumb {
+            background: rgba(255, 107, 53, 0.3);
+            border-radius: 4px;
+        }
+
+        .chat::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 107, 53, 0.5);
         }
 
         .chat-inner {
-            max-width: 780px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 18px;
+            padding: 0 20px;
         }
 
         /* MESSAGE */
         .msg {
             display: flex;
-            margin: 10px 0;
+            margin: 16px 0;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .user {
@@ -77,62 +123,153 @@
         }
 
         .bubble {
-            max-width: 85%;
-            padding: 12px 14px;
-            border-radius: 14px;
-            font-size: 15px;
-            line-height: 1.65;
-            white-space: pre-wrap;
+            max-width: 75%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.7;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .user .bubble {
-            background: #c96f20;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
             color: white;
+            border-radius: 16px 4px 16px 16px;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
         }
 
         .assistant .bubble {
-            background: #1f1f1f;
-            border: 1px solid #2a2a2a;
+            background: rgba(255, 255, 255, 0.08);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 4px 16px 16px 16px;
+        }
+
+        /* MARKDOWN IN BUBBLE */
+        .bubble h1,
+        .bubble h2,
+        .bubble h3,
+        .bubble h4,
+        .bubble h5,
+        .bubble h6 {
+            margin: 12px 0 8px 0;
+            font-weight: 700;
+        }
+
+        .bubble h1 {
+            font-size: 1.5em;
+        }
+
+        .bubble h2 {
+            font-size: 1.3em;
+        }
+
+        .bubble h3 {
+            font-size: 1.1em;
+        }
+
+        .bubble p {
+            margin: 8px 0;
+        }
+
+        .bubble ul,
+        .bubble ol {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .bubble li {
+            margin: 4px 0;
+        }
+
+        .bubble code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .bubble pre {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 8px 0;
+        }
+
+        .bubble pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.85em;
+        }
+
+        .bubble blockquote {
+            border-left: 3px solid rgba(255, 107, 53, 0.5);
+            margin: 8px 0;
+            padding-left: 12px;
+            opacity: 0.8;
+        }
+
+        .bubble a {
+            color: #ff6b35;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .bubble a:hover {
+            opacity: 0.7;
+            text-decoration: underline;
         }
 
         /* INPUT */
         .input-area {
-            position: sticky;
-            bottom: 0;
-            padding: 14px;
-            background: #141414;
-            border-top: 1px solid #232323;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 16px;
         }
 
         .input-box {
-            max-width: 780px;
+            max-width: 800px;
             margin: 0 auto;
             display: flex;
+            gap: 12px;
             align-items: flex-end;
-            gap: 10px;
-            background: #1c1c1c;
-            border: 1px solid #2a2a2a;
-            border-radius: 16px;
-            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 14px;
+            padding: 12px;
+            transition: all 0.3s ease;
         }
 
-        /* UPLOAD BUTTON */
-        .upload-label {
-            width: 38px;
-            height: 38px;
+        .input-box:focus-within {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        /* UPLOAD */
+        .upload {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: white;
-            color: black;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
             cursor: pointer;
+            font-size: 20px;
             flex-shrink: 0;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
         }
 
-        .upload-label:hover {
-            background: #eaeaea;
+        .upload:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
         }
 
         input[type="file"] {
@@ -146,47 +283,175 @@
             outline: none;
             resize: none;
             background: transparent;
-            color: #eaeaea;
-            font-size: 15px;
-            line-height: 1.5;
-            max-height: 160px;
+            color: #e0e0e0;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 120px;
+            font-family: inherit;
+        }
+
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
         }
 
         /* SEND */
-        button {
-            background: #c96f20;
+        button[type="submit"] {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
             border: none;
             color: white;
-            padding: 10px 14px;
-            border-radius: 12px;
+            padding: 10px 18px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
         }
 
-        /* PREVIEW */
-        .preview {
-            max-width: 780px;
-            margin: 10px auto 0;
+        button[type="submit"]:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+        }
+
+        button[type="submit"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        /* NEW UI ENHANCEMENTS */
+
+        /* Loading spinner */
+        .spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #ff6b35;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            z-index: 1000;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .hidden { display: none; }
+
+        /* Image preview */
+        .image-preview {
+            margin-top: 8px;
+            max-height: 120px;
+        }
+        .image-preview img {
+            max-height: 100%;
+            border-radius: 8px;
+        }
+
+        /* Copy button */
+        .bubble {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: transparent;
+            border: none;
+            color: #ff6b35;
+            cursor: pointer;
             font-size: 12px;
-            color: #aaa;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .bubble:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            color: #ff9e6b;
         }
 
-        .preview img {
-            max-width: 140px;
-            margin-top: 6px;
-            border-radius: 10px;
-            border: 1px solid #2a2a2a;
+        .char-count {
+            position: absolute;
+            right: 12px;
+            bottom: 8px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
         }
-    </style>
+
+        .remove-preview {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .remove-preview:hover {
+            background: rgba(255,0,0,0.7);
+        }
+
+        @media (max-width: 600px) {
+            .app {
+                height: 100vh;
+            }
+            .chat-inner {
+                padding: 0 10px;
+            }
+            .input-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .upload {
+                align-self: flex-start;
+            }
+            .char-count {
+                right: 8px;
+                bottom: 4px;
+            }
+        }
+
+        /* Scroll to bottom button */
+        .scroll-bottom {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        </style>
 </head>
 
 <body>
 
     <div class="app">
+        <div id="loading-spinner" class="spinner hidden" aria-label="Loading"></div>
 
         <div class="topbar">
-            <div class="title">My AI</div>
-            <a class="clear" href="/clear">New chat</a>
+            <div class="title">✨ My AI Assistant</div>
+            <!-- Clear chat with confirmation -->
+            <a class="clear" href="/clear" onclick="return confirm('Clear chat history?');">New Chat</a>
         </div>
 
         <div class="chat">
@@ -196,10 +461,11 @@
                 <div class="msg {{ msg.role }}">
                     <div class="bubble">
                         {% if msg.role == "assistant" %}
-                        {{ msg.content | safe }}
+                        <div class="md" data-content="{{ msg.content | e }}"></div>
                         {% else %}
-                        {{ msg.content }}
+                        {{ msg.content | e }}
                         {% endif %}
+                        <button class="copy-btn" title="Copy to clipboard" aria-label="Copy message">📋</button>
                     </div>
                 </div>
                 {% endfor %}
@@ -209,61 +475,157 @@
 
         <div class="input-area">
 
-            <form id="form" class="input-box" action="/chat" method="post">
+            <form class="input-box" id="form" action="/chat" method="post">
 
-                <!-- FILE UPLOAD FIXED -->
-                <input type="file" id="file" accept="image/*" />
-                <label for="file" class="upload-label">+</label>
+                <label class="upload" for="file" title="Upload image">📎</label>
+                <input type="file" id="file" accept="image/*">
 
-                <textarea name="prompt" id="prompt" placeholder="Message..."></textarea>
+                <textarea name="prompt" id="prompt" placeholder="Type your message..." rows="1"></textarea>
+                <span id="char-count" class="char-count">0/2000</span>
 
-                <button type="submit">Send</button>
+                <button type="submit" id="send-btn">→</button>
 
-                <input type="hidden" name="image_base64" id="image_base64" />
+                <input type="hidden" name="image_base64" id="image_base64">
+
+                <!-- Image preview with remove button -->
+                <div id="image-preview" class="image-preview hidden">
+                    <button id="remove-preview" class="remove-preview" title="Remove image" aria-label="Remove image">✖</button>
+                </div>
 
             </form>
-
-            <div class="preview" id="preview"></div>
-
         </div>
 
     </div>
+    <!-- Scroll to bottom button (appears when not at bottom) -->
+    <button id="scroll-bottom-btn" class="scroll-bottom hidden" aria-label="Scroll to bottom">↓</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
 
     <script>
-
-        const file = document.getElementById("file");
-        const base64 = document.getElementById("image_base64");
-        const prompt = document.getElementById("prompt");
-        const preview = document.getElementById("preview");
-
-        file.addEventListener("change", function () {
-
-            const f = this.files[0];
-            if (!f) return;
-
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-                const img = e.target.result;
-
-                base64.value = img.split(",")[1];
-
-                preview.innerHTML = `
-            <div>Image attached</div>
-            <img src="${img}" />
-        `;
-            };
-
-            reader.readAsDataURL(f);
+        // Auto-resize textarea, character count, and max length enforcement
+        const textarea = document.getElementById("prompt");
+        const charCount = document.getElementById("char-count");
+        const maxChars = 2000;
+        textarea.addEventListener("input", function () {
+            this.style.height = "auto";
+            this.style.height = Math.min(this.scrollHeight, 120) + "px";
+            const len = this.value.length;
+            charCount.textContent = `${len}/${maxChars}`;
+            if (len > maxChars) {
+                this.value = this.value.substring(0, maxChars);
+            }
         });
-
-        prompt.addEventListener("keydown", function (e) {
+        // Submit on Enter (Shift+Enter for newline)
+        textarea.addEventListener("keydown", function (e) {
             if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
-                document.getElementById("form").submit();
+                document.getElementById("form").requestSubmit();
             }
         });
 
+        // File upload and image preview
+        const fileInput = document.getElementById("file");
+        const base64Input = document.getElementById("image_base64");
+        const previewContainer = document.getElementById("image-preview");
+        const removePreviewBtn = document.getElementById("remove-preview");
+
+        fileInput.addEventListener("change", function () {
+            const file = this.files[0];
+            if (!file) {
+                previewContainer.classList.add("hidden");
+                previewContainer.innerHTML = '<button id="remove-preview" class="remove-preview" title="Remove image" aria-label="Remove image">✖</button>';
+                base64Input.value = "";
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Insert image before the remove button
+                previewContainer.innerHTML = `<img src="${e.target.result}" alt="Image preview"><button id="remove-preview" class="remove-preview" title="Remove image" aria-label="Remove image">✖</button>`;
+                previewContainer.classList.remove("hidden");
+                base64Input.value = e.target.result.split(",")[1];
+                // Re-attach remove handler
+                document.getElementById("remove-preview").addEventListener("click", removeImage);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function removeImage() {
+            previewContainer.classList.add("hidden");
+            previewContainer.innerHTML = '<button id="remove-preview" class="remove-preview" title="Remove image" aria-label="Remove image">✖</button>';
+            base64Input.value = "";
+            fileInput.value = "";
+        }
+
+        // Attach remove handler initially
+        removePreviewBtn.addEventListener("click", removeImage);
+
+        // Configure marked for better output
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+        });
+
+        // Render markdown in assistant messages
+        document.querySelectorAll(".md").forEach(el => {
+            const content = el.getAttribute("data-content");
+            if (content) {
+                const textarea = document.createElement("textarea");
+                textarea.innerHTML = content;
+                const decodedContent = textarea.value;
+                const htmlContent = marked.parse(decodedContent);
+                const cleanHtml = DOMPurify.sanitize(htmlContent);
+                el.innerHTML = cleanHtml;
+            }
+        });
+
+        // Form submission handling: disable button, show spinner overlay
+        const form = document.getElementById("form");
+        const submitBtn = document.getElementById("send-btn");
+        const spinner = document.getElementById("loading-spinner");
+        form.addEventListener("submit", function () {
+            submitBtn.disabled = true;
+            spinner.classList.remove("hidden");
+        });
+
+        // Copy to clipboard for each message (button appears on hover)
+        document.querySelectorAll(".copy-btn").forEach(btn => {
+            btn.addEventListener("click", function () {
+                const bubble = this.parentElement;
+                let text = "";
+                const mdDiv = bubble.querySelector(".md");
+                if (mdDiv) {
+                    const content = mdDiv.getAttribute("data-content");
+                    text = content ? content : bubble.innerText;
+                } else {
+                    // Remove copy button text from bubble content
+                    text = bubble.innerText.replace(this.textContent, "").trim();
+                }
+                navigator.clipboard.writeText(text).then(() => {
+                    const original = this.textContent;
+                    this.textContent = "✅";
+                    setTimeout(() => { this.textContent = original; }, 1500);
+                });
+            });
+        });
+
+        // Scroll-to-bottom button behavior
+        const scrollBtn = document.getElementById("scroll-bottom-btn");
+        const chat = document.querySelector(".chat");
+        chat.addEventListener("scroll", function () {
+            if (chat.scrollTop + chat.clientHeight < chat.scrollHeight - 100) {
+                scrollBtn.classList.remove("hidden");
+            } else {
+                scrollBtn.classList.add("hidden");
+            }
+        });
+        scrollBtn.addEventListener("click", function () {
+            chat.scrollTop = chat.scrollHeight;
+            scrollBtn.classList.add("hidden");
+        });
+
+        // Auto-scroll to bottom on page load
+        chat.scrollTop = chat.scrollHeight;
     </script>
 
 </body>
