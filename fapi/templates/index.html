@@ -15,9 +15,10 @@
 
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #e0e0e0;
+            font-family: 'Tron', 'Orbitron', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000, #0a1a2e, #16213e);
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         /* LAYOUT */
@@ -25,6 +26,11 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
+            background-image:
+                linear-gradient(to right, rgba(0,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
         /* TOP */
@@ -33,36 +39,42 @@
             justify-content: space-between;
             align-items: center;
             padding: 16px 24px;
-            background: rgba(20, 20, 30, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 20, 40, 0.95);
+            border-bottom: 2px solid #00ffff;
+            border-bottom-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
             backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1);
         }
 
         .title {
-            font-size: 18px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 24px;
+            font-weight: 900;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #0088ff, 0 0 30px #0088ff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .clear {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            padding: 10px 20px;
+            border-radius: 0;
+            border: 2px solid #00ffff;
             text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
             transition: all 0.3s ease;
-            border: none;
             cursor: pointer;
+            text-shadow: 0 0 10px #00ffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .clear:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00ffff, inset 0 0 10px rgba(0, 255, 255, 0.4);
+            background: rgba(0, 255, 255, 0.2);
         }
 
         /* CHAT */
@@ -82,12 +94,14 @@
         }
 
         .chat::-webkit-scrollbar-thumb {
-            background: rgba(102, 126, 234, 0.3);
+            background: rgba(0, 255, 255, 0.5);
             border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
         }
 
         .chat::-webkit-scrollbar-thumb:hover {
-            background: rgba(102, 126, 234, 0.5);
+            background: rgba(0, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 1);
         }
 
         .chat-inner {
@@ -143,14 +157,19 @@
         }
 
         .user .bubble {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: rgba(0, 50, 100, 0.8);
+            color: #00ffff;
+            border: 2px solid #0088ff;
+            box-shadow: 0 0 15px rgba(0, 136, 255, 0.6), inset 0 0 10px rgba(0, 255, 255, 0.2);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
 
         .assistant .bubble {
-            background: rgba(40, 40, 60, 0.7);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            color: #e0e0e0;
+            background: rgba(10, 26, 46, 0.9);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(0, 255, 255, 0.1);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
 
         /* MARKDOWN STYLING */
@@ -164,9 +183,9 @@
             font-weight: 700;
         }
 
-        .md h1 { font-size: 1.8em; color: #667eea; }
-        .md h2 { font-size: 1.6em; color: #667eea; }
-        .md h3 { font-size: 1.4em; color: #764ba2; }
+        .md h1 { font-size: 1.8em; color: #00ffff; text-shadow: 0 0 10px #00ffff; }
+        .md h2 { font-size: 1.6em; color: #00ffff; text-shadow: 0 0 10px #00ffff; }
+        .md h3 { font-size: 1.4em; color: #00ffff; text-shadow: 0 0 8px #00ffff; }
 
         .md p {
             margin: 8px 0;
@@ -182,21 +201,24 @@
         }
 
         .md code {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 50, 100, 0.6);
             padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
+            border-radius: 0;
+            font-family: 'Courier New', 'Courier', monospace;
             font-size: 0.9em;
-            color: #a6e22e;
+            color: #00ffff;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
         }
 
         .md pre {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 8px;
+            background: rgba(0, 20, 40, 0.8);
+            border: 2px solid #00ffff;
+            border-radius: 0;
             padding: 12px;
             overflow-x: auto;
             margin: 12px 0;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.05);
         }
 
         .md pre code {
@@ -211,21 +233,25 @@
         }
 
         .md blockquote {
-            border-left: 3px solid #667eea;
+            border-left: 3px solid #00ffff;
             margin: 8px 0;
             padding-left: 12px;
-            color: #b0b0c0;
+            color: #00ffff;
             font-style: italic;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
         }
 
         .md a {
-            color: #667eea;
+            color: #00ffff;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+            border-bottom: 1px solid #00ffff;
         }
 
         .md a:hover {
-            color: #764ba2;
+            color: #0088ff;
+            text-shadow: 0 0 15px #00ffff;
             text-decoration: underline;
         }
 
@@ -234,26 +260,30 @@
             margin: 12px 0;
             width: 100%;
             font-size: 0.9em;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
         }
 
         .md table th, .md table td {
-            border: 1px solid rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.5);
             padding: 8px;
             text-align: left;
         }
 
         .md table th {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            font-weight: 600;
+            background: rgba(0, 100, 150, 0.6);
+            color: #00ffff;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
 
         /* INPUT */
         .input-area {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(20, 20, 30, 0.8);
+            border-top: 2px solid #00ffff;
+            background: rgba(0, 20, 40, 0.95);
             padding: 16px;
             backdrop-filter: blur(10px);
+            box-shadow: inset 0 2px 10px rgba(0, 255, 255, 0.1), 0 0 20px rgba(0, 255, 255, 0.2);
         }
 
         .input-box {
@@ -262,25 +292,26 @@
             display: flex;
             gap: 12px;
             align-items: flex-end;
-            background: rgba(40, 40, 60, 0.5);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 12px;
+            background: rgba(0, 40, 80, 0.6);
+            border: 2px solid #00ffff;
+            border-radius: 0;
             padding: 12px;
             transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1);
         }
 
         .input-box:focus-within {
-            border-color: rgba(102, 126, 234, 0.6);
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.1);
+            border-color: #0088ff;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 136, 255, 0.4), inset 0 0 10px rgba(0, 255, 255, 0.2);
         }
 
         /* UPLOAD */
         .upload {
             width: 40px;
             height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            border-radius: 0;
+            background: rgba(0, 255, 255, 0.15);
+            color: #00ffff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -288,13 +319,16 @@
             font-size: 20px;
             font-weight: bold;
             transition: all 0.3s ease;
-            border: none;
+            border: 2px solid #00ffff;
             flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+            text-shadow: 0 0 5px #00ffff;
         }
 
         .upload:hover {
             transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8), inset 0 0 10px rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.25);
         }
 
         input[type="file"] {
@@ -308,61 +342,72 @@
             outline: none;
             resize: none;
             background: transparent;
-            color: #e0e0e0;
+            color: #00ffff;
             font-size: 15px;
             line-height: 1.5;
-            font-family: inherit;
+            font-family: 'Courier New', monospace;
             max-height: 120px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
         }
 
         textarea::placeholder {
-            color: #808090;
+            color: rgba(0, 255, 255, 0.4);
+            text-shadow: 0 0 3px rgba(0, 255, 255, 0.2);
         }
 
         /* SEND BUTTON */
         button {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            color: white;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            color: #00ffff;
             padding: 10px 18px;
-            border-radius: 8px;
+            border-radius: 0;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 12px;
             transition: all 0.3s ease;
             flex-shrink: 0;
+            text-shadow: 0 0 5px #00ffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8), inset 0 0 10px rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.2);
         }
 
         button:active {
-            transform: translateY(0);
+            transform: scale(0.98);
         }
 
         button:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
         }
 
         .loading-indicator {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #667eea;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            font-weight: 700;
         }
 
         .spinner {
             display: inline-block;
             width: 16px;
             height: 16px;
-            border: 2px solid rgba(102, 126, 234, 0.3);
-            border-top-color: #667eea;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-top-color: #00ffff;
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
         }
 
         @keyframes spin {
@@ -370,12 +415,35 @@
         }
 
         .error-message {
-            color: #ff6b6b;
+            color: #ff0080;
             padding: 12px;
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            border-radius: 8px;
+            background: rgba(255, 0, 128, 0.1);
+            border: 2px solid #ff0080;
+            border-radius: 0;
             margin: 16px 0;
+            text-shadow: 0 0 5px rgba(255, 0, 128, 0.6);
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
+        }
+
+        /* IMAGE IN CHAT MESSAGES */
+        .msg-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 0;
+            margin: 8px 0;
+            display: block;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            border: 2px solid #00ffff;
+        }
+
+        .user .msg-image {
+            border: 2px solid #0088ff;
+            box-shadow: 0 0 15px rgba(0, 136, 255, 0.8);
+        }
+
+        .assistant .msg-image {
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
         }
     </style>
 </head>
@@ -385,7 +453,7 @@
     <div class="app">
 
         <div class="topbar">
-            <div class="title">🤖 AI Assistant</div>
+            <div class="title">AI Assistant</div>
             <button class="clear" id="new-chat-btn">New Chat</button>
         </div>
 
@@ -415,6 +483,7 @@
 
                 <label class="upload" for="file">📎</label>
                 <input type="file" id="file" accept="image/*">
+<img id="image-preview" style="max-width: 200px; margin-top: 8px; display: none; border: 1px solid #ccc; border-radius: 4px;">
                 <textarea name="prompt" id="prompt" placeholder="Message..." spellcheck="true"></textarea>
 
                 <button type="submit" id="send-btn">Send</button>
@@ -498,6 +567,11 @@
             const reader = new FileReader();
             reader.onload = function (e) {
                 base64Input.value = e.target.result.split(",")[1];
+                const previewImg = document.getElementById('image-preview');
+                if (previewImg) {
+                    previewImg.src = e.target.result;
+                    previewImg.style.display = 'block';
+                }
             };
             reader.readAsDataURL(file);
         });
@@ -527,17 +601,28 @@
             }
 
             const imageBase64 = base64Input.value;
+            const previewImg = document.getElementById('image-preview');
+            const imageDataUrl = previewImg && previewImg.style.display !== 'none' ? previewImg.src : null;
 
             // Add user message to UI
             const userBubble = document.createElement('div');
             userBubble.className = 'msg user';
-            userBubble.innerHTML = `<div class="bubble">${prompt}</div>`;
+            
+            let userContent = `<div class="bubble">${prompt}</div>`;
+            if (imageDataUrl) {
+                userContent = `<div class="bubble"><img class="msg-image" src="${imageDataUrl}" alt="Uploaded image"><div>${prompt}</div></div>`;
+            }
+            userBubble.innerHTML = userContent;
             chatInner.appendChild(userBubble);
 
-            // Clear input
+            // Clear input and preview
             promptInput.value = '';
             base64Input.value = '';
             fileInput.value = '';
+            if (previewImg) {
+                previewImg.src = '';
+                previewImg.style.display = 'none';
+            }
             promptInput.style.height = 'auto';
             scrollToBottom();
 
